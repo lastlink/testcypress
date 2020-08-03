@@ -21,30 +21,47 @@ const argv = yargs.options({
   .argv
 
 // const reportDir = cypressConfig.reporterOptions.reportDir
-// const reportFiles = `${reportDir}/*.json`
+const reportDir = "cypress/results";
+const reportFiles = `${reportDir}/*.json`
 // // list all of existing report files
-// ls(reportFiles, { recurse: true }, file => console.log(`removing ${file.full}`))
+ls(reportFiles, { recurse: true }, file => console.log(`removing ${file.full}`))
 
-// // delete all existing report files
-// rm(reportFiles, (error) => {
-//     if (error) {
-//         console.error(`Error while removing existing report files: ${error}`)
-//         process.exit(1)
-//     }
-//     console.log('Removing all existing report files successfully!')
-// })
+// delete all existing report files
+rm(reportFiles, (error) => {
+    if (error) {
+        console.error(`Error while removing existing report files: ${error}`)
+        process.exit(1)
+    }
+    console.log('Removing all existing report files successfully!')
+})
+
+const jreportFiles = `cypress/jresults/*.xml`
+// // list all of existing report files
+ls(jreportFiles, { recurse: true }, file => console.log(`removing ${file.full}`))
+
+// delete all existing report files
+rm(jreportFiles, (error) => {
+    if (error) {
+        console.error(`Error while removing existing report files: ${error}`)
+        process.exit(1)
+    }
+    console.log('Removing all existing report files successfully!')
+})
 
 cypress.run({
     browser: argv.browser,
-    spec: argv.spec
+    spec: argv.spec,
+    reporter: "cypress-multi-reporters",
+    "reporter-options": "configFile=reporter-config.json"
 }).then((results) => {
     console.log("result")
     console.log(results)
     const reporterOptions = {
-        reportDir: "cypress/results/mochawesome*.json"
+        files: [reportFiles]
         // results.config.reporterOptions.reportDir,
     }
     generateReport(reporterOptions)
+    generateJReport()
 }).catch((error) => {
     console.error('errors: ', error)
     process.exit(1)
@@ -55,4 +72,3 @@ function generateReport(options) {
         marge.create(report, options)
     })
 }
-
