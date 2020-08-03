@@ -6,12 +6,15 @@
   "scripts": {
     "open": "cypress open",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cypress run",
+    "start": "cypress run -b chrome",
     "test-report": "",
     "delete:reports": "rm cypress/results/* || true",
-    "prereport": "npm run delete:reports",
+    "delete:jreports": "rm cypress/jresults/* || true",
+    "e2e:report": "node cypress_runner -b chrome",
+    "prereport": "npm run delete:reports && npm run delete:jreports",
     "report": "cypress run --reporter cypress-multi-reporters --reporter-options configFile=reporter-config.json",
     "merge-json": "npx mochawesome-merge \"cypress/results/*.json\" > mochawesome.json",
+    "merge-junit": "junit-merge -d cypress/jresults --createDir=true -o mochawesome-report/junit.xml",
     "generateHtml": "npx marge mochawesome.json"
   },
   "author": "",
@@ -19,8 +22,10 @@
   "devDependencies": {
     "cypress": "^4.12.0",
     "cypress-multi-reporters": "^1.4.0",
+    "junit-merge": "^2.0.0",
     "mocha-junit-reporter": "^2.0.0",
     "mochawesome": "^6.1.1",
+    "ls": "^0.2.1",
     "mochawesome-merge": "^4.1.0",
     "mochawesome-report-generator": "^5.1.0",
     "typescript": "^3.9.7"
