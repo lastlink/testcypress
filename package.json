@@ -6,11 +6,23 @@
   "scripts": {
     "open": "cypress open",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cypress run"
+    "start": "cypress run",
+    "test-report": "",
+    "delete:reports": "rm cypress/results/* || true",
+    "prereport": "npm run delete:reports",
+    "report": "cypress run --reporter cypress-multi-reporters --reporter-options configFile=reporter-config.json",
+    "merge-json": "npx mochawesome-merge \"cypress/results/*.json\" > mochawesome.json",
+    "generateHtml": "npx marge mochawesome.json"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^4.12.0"
+    "cypress": "^4.12.0",
+    "cypress-multi-reporters": "^1.4.0",
+    "mocha-junit-reporter": "^2.0.0",
+    "mochawesome": "^6.1.1",
+    "mochawesome-merge": "^4.1.0",
+    "mochawesome-report-generator": "^5.1.0",
+    "typescript": "^3.9.7"
   }
 }

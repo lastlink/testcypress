@@ -1,1 +1,9 @@
 node_modules
+.DS_Store
+*.mp4
+screenshots
+results
+jresults
+mochawesome-report
+
+mochawesome.json
