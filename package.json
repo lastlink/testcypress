@@ -15,7 +15,8 @@
     "report": "cypress run --reporter cypress-multi-reporters --reporter-options configFile=reporter-config.json",
     "merge-json": "npx mochawesome-merge \"cypress/results/*.json\" > mochawesome.json",
     "merge-junit": "junit-merge -d cypress/jresults --createDir=true -o mochawesome-report/junit.xml",
-    "generateHtml": "npx marge mochawesome.json"
+    "generateHtml": "npx marge mochawesome.json",
+    "copyScreenshots": "mv cypress/screenshots/* mochawesome-report/assets/"
   },
   "author": "",
   "license": "ISC",

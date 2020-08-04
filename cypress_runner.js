@@ -57,11 +57,11 @@ cypress.run({
     console.log("result")
     console.log(results)
     const reporterOptions = {
-        files: [reportFiles]
+        files: [reportFiles],
+        // reportDir: results.config.reporterOptions.reportDir
         // results.config.reporterOptions.reportDir,
     }
     generateReport(reporterOptions)
-    generateJReport()
 }).catch((error) => {
     console.error('errors: ', error)
     process.exit(1)
