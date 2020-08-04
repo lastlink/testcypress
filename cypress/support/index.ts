@@ -23,7 +23,7 @@ const addContext = require('mochawesome/addContext')
 // return filePath to addContext to mochawesome reporter
 
 Cypress.on('test:after:run', (test, runnable) => {
-    if (test.state === 'failed') {
+    if (test.state === 'failed' && runnable && runnable.parent) {
         const screenshotFileName = `${runnable.parent.title} -- ${test.title} (failed).png`
         addContext({ test }, `assets/${Cypress.spec.name}/${screenshotFileName}`)
     }
