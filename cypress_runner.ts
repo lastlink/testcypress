@@ -1,12 +1,12 @@
-const cypress = require('cypress')
-const yargs = require('yargs')
+import cypress from 'cypress'
+import yargs from 'yargs'
 const { merge } = require('mochawesome-merge')
 const marge = require('mochawesome-report-generator')
 const rm = require('rimraf')
-const cypressConfig = require('./cypress')
+// import cypressConfig from './cypress.json'
 const ls = require('ls')
 // const fs = require('fs')
-const fs = require('fs-extra'); 
+import fs from 'fs-extra'
 
 const argv = yargs.options({
     'browser': {
@@ -27,10 +27,10 @@ const argv = yargs.options({
 const reportDir = "cypress/results";
 const reportFiles = `${reportDir}/*.json`
 // // list all of existing report files
-ls(reportFiles, { recurse: true }, file => console.log(`removing ${file.full}`))
+ls(reportFiles, { recurse: true }, (file: any) => console.log(`removing ${file.full}`))
 
 // delete all existing report files
-rm(reportFiles, (error) => {
+rm(reportFiles, (error: any) => {
     if (error) {
         console.error(`Error while removing existing report files: ${error}`)
         process.exit(1)
@@ -40,10 +40,10 @@ rm(reportFiles, (error) => {
 
 const jreportFiles = `cypress/jresults/*.xml`
 // // list all of existing report files
-ls(jreportFiles, { recurse: true }, file => console.log(`removing ${file.full}`))
+ls(jreportFiles, { recurse: true }, (file: any) => console.log(`removing ${file.full}`))
 
 // delete all existing report files
-rm(jreportFiles, (error) => {
+rm(jreportFiles, (error: any) => {
     if (error) {
         console.error(`Error while removing existing report files: ${error}`)
         process.exit(1)
@@ -55,8 +55,8 @@ cypress.run({
     browser: argv.browser,
     spec: argv.spec,
     reporter: "cypress-multi-reporters",
-    "reporter-options": "configFile=reporter-config.json"
-}).then((results) => {
+    reporterOptions: "configFile=reporter-config.json"
+}).then((results: any) => {
     // console.log("result")
     // console.log(results)
     const reporterOptions = {
@@ -66,13 +66,13 @@ cypress.run({
     }
     generateReport(reporterOptions)
     // postReports()
-}).catch((error) => {
+}).catch((error: any) => {
     console.error('errors: ', error)
     process.exit(1)
 })
 
-function generateReport(options) {
-    return merge(options).then((report) => {
+function generateReport(options: any) {
+    return merge(options).then((report: any) => {
         marge.create(report, options).then(() => {
             postReports()
         })
