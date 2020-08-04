@@ -5,6 +5,9 @@ const marge = require('mochawesome-report-generator')
 const rm = require('rimraf')
 const cypressConfig = require('./cypress')
 const ls = require('ls')
+// const fs = require('fs')
+const fs = require('fs-extra'); 
+
 const argv = yargs.options({
     'browser': {
         alias: 'b',
@@ -18,7 +21,7 @@ const argv = yargs.options({
         default: 'cypress/integration/**/*.spec.js'
     }
 }).help()
-  .argv
+    .argv
 
 // const reportDir = cypressConfig.reporterOptions.reportDir
 const reportDir = "cypress/results";
@@ -54,14 +57,15 @@ cypress.run({
     reporter: "cypress-multi-reporters",
     "reporter-options": "configFile=reporter-config.json"
 }).then((results) => {
-    console.log("result")
-    console.log(results)
+    // console.log("result")
+    // console.log(results)
     const reporterOptions = {
         files: [reportFiles],
         // reportDir: results.config.reporterOptions.reportDir
         // results.config.reporterOptions.reportDir,
     }
     generateReport(reporterOptions)
+    // postReports()
 }).catch((error) => {
     console.error('errors: ', error)
     process.exit(1)
@@ -69,6 +73,18 @@ cypress.run({
 
 function generateReport(options) {
     return merge(options).then((report) => {
-        marge.create(report, options)
+        marge.create(report, options).then(() => {
+            postReports()
+        })
     })
+}
+
+/**
+ * move screenshots and videos
+ */
+function postReports() {
+    // screenshots
+    fs.copy("cypress/screenshots/", "mochawesome-report/assets", function () { })
+    // videos
+    fs.rename("cypress/videos", "mochawesome-report/videos", function () { })
 }

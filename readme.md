@@ -9,3 +9,5 @@
 ## getting started
 * `npm install`
 * `npm open` open cypress ide
+* `npm run e2e:report`
+* `npm run e2e:report -- --spec cypress/integration/examples/cookies.spec.js` run spec pattern
