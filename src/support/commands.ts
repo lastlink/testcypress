@@ -23,3 +23,24 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+import 'cypress-harvester'
+
+Cypress.Commands.add(
+    'shouldHaveTrimmedText',
+    {
+        prevSubject: true,
+    },
+    (subject, equalTo) => {
+        if (equalTo instanceof RegExp) {
+            expect(subject.text().trim().replace(/  +/g, ' ')).to.match(equalTo);
+        }
+        // not a number
+        else if (isNaN(equalTo)) {
+            expect(subject.text().trim().replace(/  +/g, ' ')).to.eq(equalTo);
+        } else {
+            expect(parseInt(subject.text())).to.eq(equalTo);
+        }
+        return subject;
+    },
+);
