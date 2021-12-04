@@ -18,14 +18,20 @@
     "generateHtml": "npx marge mochawesome.json",
     "copyScreenshots": "mv cypress/screenshots/* mochawesome-report/assets/"
   },
-  "author": "",
+  "author": "lastlink",
   "license": "ISC",
   "devDependencies": {
     "@cypress/code-coverage": "^3.8.1",
     "@types/node": "^14.0.27",
+    "@types/rimraf": "^3.0.0",
     "@types/yargs": "^15.0.5",
-    "cypress": "^4.12.0",
+    "cypress": "^7.7.0",
+    "cypress-fail-fast": "^3.0.0",
+    "cypress-file-upload": "^5.0.8",
+    "cypress-harvester": "^1.0.3",
     "cypress-multi-reporters": "^1.4.0",
+    "eslint-plugin-chai-friendly": "^0.7.1",
+    "eslint-plugin-cypress": "^2.11.3",
     "fs-extra": "^9.0.1",
     "junit-merge": "^2.0.0",
     "ls": "^0.2.1",
@@ -37,6 +43,7 @@
     "typescript": "^3.9.7"
   },
   "dependencies": {
-    "@types/fs-extra": "^9.0.1"
+    "@types/fs-extra": "^9.0.1",
+    "cypress-downloadfile": "^1.2.1"
   }
 }

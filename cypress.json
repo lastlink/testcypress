@@ -1,7 +1,15 @@
 {
     "reporter": "cypress-multi-reporters",
+    "integrationFolder": "src/integration",
+    "fixturesFolder": "src/fixtures",
+    "pluginsFile": "src/plugins/index.ts",
+    "supportFile": "src/support/index.ts",
     "reporterOptions": {
-    "configFile": "reporter-config.json"
+        "configFile": "reporter-config.json"
+    },
+    "env": {
+        "FAIL_FAST_STRATEGY": "spec",
+        "FAIL_FAST_ENABLED": true,
+        "cypress/globals": true
     }
 }
-

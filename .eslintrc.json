@@ -1,0 +1,14 @@
+{
+    "plugins": [
+        "cypress",
+        "chai-friendly"
+    ],
+    // "rules": {
+    //     "no-unused-expressions": 0,
+    //     "chai-friendly/no-unused-expressions": 2
+    // },
+    "extends": [
+        "plugin:cypress/recommended",
+        "plugin:chai-friendly/recommended"
+    ]
+}
