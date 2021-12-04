@@ -10,7 +10,7 @@
     "test-report": "",
     "delete:reports": "rm cypress/results/* || true",
     "delete:jreports": "rm cypress/jresults/* || true",
-    "e2e:report": "node cypress_runner -b chrome",
+    "e2e:report": "ts-node --project tsconfig.json cypress_runner -b chrome",
     "prereport": "npm run delete:reports && npm run delete:jreports",
     "report": "cypress run --reporter cypress-multi-reporters --reporter-options configFile=reporter-config.json",
     "merge-json": "npx mochawesome-merge \"cypress/results/*.json\" > mochawesome.json",
@@ -22,6 +22,8 @@
   "license": "ISC",
   "devDependencies": {
     "@cypress/code-coverage": "^3.8.1",
+    "@types/node": "^14.0.27",
+    "@types/yargs": "^15.0.5",
     "cypress": "^4.12.0",
     "cypress-multi-reporters": "^1.4.0",
     "fs-extra": "^9.0.1",
@@ -31,6 +33,10 @@
     "mochawesome": "^6.1.1",
     "mochawesome-merge": "^4.1.0",
     "mochawesome-report-generator": "^5.1.0",
+    "ts-node": "^8.10.2",
     "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "@types/fs-extra": "^9.0.1"
   }
 }
