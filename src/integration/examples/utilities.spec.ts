@@ -75,7 +75,9 @@ context('Utilities', () => {
 
     expect(matching, 'comments').to.be.false
   })
-
+  /*
+  moment was deprecated 
+  see comment in https://docs.cypress.io/guides/references/changelog#7-0-0
   it('Cypress.moment() - format or parse dates using a moment method', () => {
     // https://on.cypress.io/moment
     const time = Cypress.moment('2014-04-25T19:38:53.196Z').utc().format('h:mm A')
@@ -101,6 +103,7 @@ context('Utilities', () => {
           `${m.format(f)} should be between ${start.format(f)} and ${end.format(f)}`).to.be.true
       })
   })
+  */
 
   it('Cypress.Promise - instantiate a bluebird promise', () => {
     // https://on.cypress.io/promise
